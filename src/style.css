@@ -1,0 +1,319 @@
+:root {
+    --bg-dark: hsl(0, 0%, 10%);
+}
+
+/* Josh Comeau Css Reset start */
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/*
+  2. Remove default margin
+*/
+* {
+    margin: 0;
+}
+
+/*
+  Typographic tweaks!
+  3. Add accessible line-height
+  4. Improve text rendering
+*/
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    /* font family */
+    font-family: "Roboto", sans-serif;
+    background-color: var(--bg-dark);
+}
+
+/*
+  5. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/*
+  6. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/*
+  7. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+/*
+  8. Create a root stacking context
+*/
+#root,
+#__next {
+    isolation: isolate;
+}
+
+/* Josh Comeau Css Reset end */
+
+.m-5 {
+    margin: 5rem;
+}
+
+.mt-5 {
+    margin-top: 5rem;
+}
+
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.content-grid {
+    --padding-inline: 2rem;
+    --content-max-width: 80ch;
+    --breakout-max-width: 120ch;
+    --breakout-size: calc(
+        (var(--breakout-max-width) - var(--content-max-width)) / 2
+    );
+    gap: 1rem;
+
+    display: grid;
+    grid-template-columns:
+        [full-width-start] minmax(0, 1fr)
+        [breakout-start] minmax(0, var(--breakout-size))
+        [content-start] min(
+            100% - var(--padding-inline) * 2,
+            var(--content-max-width)
+        )
+        [content-end]
+        minmax(0, var(--breakout-size)) [breakout-end]
+        minmax(0, 1fr) [full-width-start];
+}
+
+.content-grid > :not(.breakout, .full-width) {
+    grid-column: content;
+}
+
+.content-grid > .breakout {
+    grid-column: breakout;
+}
+
+.content-grid > .full-width {
+    grid-column: full-width;
+}
+
+.grid-table {
+    --gap: 1rem;
+    --line-thickness: 2px;
+    --line-color: hsl(0, 0%, 18%);
+    --header-color: hsl(0, 0%, 53%);
+    --line-offset: calc(var(--gap) / 2);
+    --number-of-cols: 3;
+
+    display: grid;
+    /* grid-template-columns: 350px 150px 350px; */
+    grid-template-columns: repeat(var(--number-of-cols), minmax(120px, 1fr)) 100px;
+    /* grid-gap: 10px; */
+    /* align-items: stretch; */
+    /* grid-auto-rows: minmax(min-content, 1fr); */
+    gap: var(--gap);
+    /* overflow: hidden; */
+    overflow-y: auto;
+    border-bottom: var(--line-thickness) solid var(--line-color);
+    padding-bottom: var(--line-offset);
+    padding-top: var(--line-offset);
+
+    /* margin-right: 1rem; */
+
+    margin-top: var(--line-offset);
+    border-top: 1px solid var(--line-color);
+    margin: 0 10px;
+}
+
+@media screen and (min-width: 700px) {
+    .grid-table {
+        overflow: hidden;
+    }
+}
+
+/* Pseudo Elements */
+.grid-table > .data::before,
+.grid-table > .data::after {
+    content: "";
+    background-color: var(--line-color);
+    position: absolute;
+}
+
+.grid-table > .data {
+    position: relative;
+    /* padding: .5rem; */
+    /* overflow: hidden; */
+}
+
+.grid-table > .header {
+    color: hsl(0, 0%, 53%);
+}
+
+.grid-table > .header:nth-child(1) {
+    padding-left: 2rem;
+}
+
+.grid-table > .data {
+    color: hsl(0, 0%, 83%);
+    padding-left: 2rem;
+}
+
+/* .grid-table > .header:nth-child(5n + 1),
+.grid-table > .data:nth-child(5n + 1)
+{
+    background-color: red;
+} */
+
+
+.input-number {
+    position: relative;
+    text-align: right;
+    background-color: transparent;
+    color: hsl(0, 0%, 83%);
+    width: 100%;
+    border: none;
+}
+
+.input-text {
+    position: relative;
+    background-color: transparent;
+    color: hsl(0, 0%, 83%);
+    width: 100%;
+    border: none;
+}
+
+/* .input-number::after {
+  content: "";
+  position: absolute;
+  right: 8px; 
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; 
+} */
+
+/* row lines */
+.grid-table > .data::after {
+    /* width: calc(100% + var(--line-offset) * 2); */
+    width: calc(100% + var(--line-offset) * 2);
+    height: var(--line-thickness);
+    top: calc(var(--line-offset) * -1);
+    left: calc(var(--line-offset) * -1);
+}
+
+/* columns lines */
+.grid-table > .data::before {
+    width: var(--line-thickness);
+    height: calc(100% + var(--line-offset) * 2);
+    bottom: calc(var(--line-offset) * -1);
+    left: calc(var(--line-offset) * -1);
+}
+
+/* .grid-table > .data:nth-child(3n) {
+  background-color: green;
+} */
+
+.w-5 {
+    width: 5rem;
+}
+
+.text-white {
+    color: hsl(0, 0%, 85%);
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.bg-blue {
+    background-color: hsl(240, 56%, 41%);
+}
+
+.text-xl {
+    font-size: 2.3rem;
+}
+
+.leading-1 {
+    line-height: 2.5rem;
+}
+
+.rounded {
+    border-radius: 1rem;
+}
+
+.border-bottom-white {
+    border-bottom: 1px solid white;
+}
+
+.border-none {
+    border: none;
+}
+
+.flex {
+    display: flex;
+    /* flex-wrap: wrap; */
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.items-end {
+    align-items: end;
+}
+
+.data-resizable {
+    /* width: calc(var(--gap) / 2); */
+    width: var(--gap);
+    height: calc(100% + var(--line-offset) * 2);
+    background-color: red;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateX(var(--gap)) translateY(calc(var(--line-offset) * -1));
+    /* transform: translateX(calc(var(--gap) - var(--gap) / 4)) translateY(calc(var(--line-offset) * -1)); */
+}
