@@ -1,13 +1,13 @@
 import { Outlet } from 'react-router'
+import Navbar from '../components/ui/Navbar'
 
 export default function App() {
+
   return (
-    <>
-      <div className='bg-red-700'>
-        navbar
-      </div>
+    <main className="">
+      <Navbar />
       <Outlet />
-    </>
+    </main>
   )
 }
 

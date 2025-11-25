@@ -1,36 +1,74 @@
 import { Icon } from "@iconify/react";
+import Expense from "../components/ui/Expense";
+import { useState } from "react";
 function App() {
 
+  const [expenses, _setExpenses] = useState([
+    {
+      id: 1,
+      icon: 'mdi:train',
+      name: 'Metro',
+      tag: 'Transportation',
+      amount: 30,
+      max: 70
+    },
+    {
+      id: 2,
+      icon: 'mdi:train',
+      name: 'Metro',
+      tag: 'Transportation',
+      amount: 30,
+      max: 70
+    },
+    {
+      id: 3,
+      icon: 'mdi:train',
+      name: 'Metro',
+      tag: 'Transportation',
+      amount: 30,
+      max: 70
+    },
+    {
+      id: 4,
+      icon: 'mdi:train',
+      name: 'Metro',
+      tag: 'Transportation',
+      amount: 30,
+      max: 70
+    },
+    {
+      id: 5,
+      icon: 'mdi:train',
+      name: 'Metro',
+      tag: 'Transportation',
+      amount: 30,
+      max: 70
+    },
+  ])
+
   return (
-    <>
-      <p className="">Income: $1000</p>
-
-      <div className="bg-gray-50 p-5 m-5 rounded-xl w-fit">
-        <h1 className="font-bold text-2xl mb-5">Fixed Expenses</h1>
-        <div className="flex justify-between items-center">
-
-          <Icon icon="mdi:train" className="size-15 bg-black rounded-full p-3 text-white" />
-          <div className="w-sm p-3 rounded-xl">
-            <div className="py-2 rounded-xl flex justify-between items-center">
-              <div>
-                <p className="text-2xl font-semibold">metro</p>
-                <span className="text-sm text-gray-500">Transportation · Monthly</span>
-              </div>
-              <div className="flex items-end flex-col">
-                <p className="text-2xl font-semibold">15 Azn</p>
-                <span className="text-sm text-gray-500">of 50 Azn</span>
-              </div>
-            </div>
-            <div className="flex justify-between items-center gap-3">
-              <div className="relative w-full bg-gray-300 h-3 rounded-2xl">
-                <div className="absolute w-[34%] bg-gradient-to-r transition-all from-green-400 to-green-600 h-full rounded-2xl"></div>
-              </div>
-              <span className="text-green-800">24%</span>
-            </div>
+    <div className="px-5">
+      <p className="p-3">Income: $1000</p>
+      <div className="bg-gray-100 rounded-xl w-full">
+        <div className="px-3 py-2 flex justify-between items-center border-b-1 border-b-gray-200">
+          <h1 className="font-bold text-2xl">Fixed Expenses</h1>
+          <div>
+            <button className="bg-blue-500 rounded-full p-1">
+              <Icon icon="tabler:plus" className="text-xl text-white" />
+            </button>
           </div>
         </div>
+        <div className="divide-y divide-gray-200">
+          {expenses.map(expense => (
+            <Expense key={expense.id} {...expense} />
+          ))}
+        </div>
+
+        {/* <Expense icon={'mdi:train'} name={'Metro'} tag={'Transportation'} amount={25} max={70} /> */}
+        {/* <Expense icon={'mdi:train'} name={'Metro'} tag={'Transportation'} amount={30} max={70} /> */}
+        {/* <Expense icon={'mdi:train'} name={'Metro'} tag={'Transportation'} amount={30} max={70} /> */}
       </div>
-    </>
+    </div>
   )
 }
 
